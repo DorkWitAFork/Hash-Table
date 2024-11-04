@@ -3,7 +3,7 @@
 	SID #1555744
 	CISP 430
 	Professor Huang
-	Assignemnt 6
+	Assignment 6
 
 	This is our main driver file, which will be used to test the Table class.
 	We will instantiate two Table objects, and then use the random number generator to add 70 numbers to each object.
