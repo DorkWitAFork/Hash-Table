@@ -28,22 +28,22 @@ int main()
 	Table<int> t1;
 	Table<int> t2;
 
-	cout << "Instantiate two Table objects." << endl << endl;
-	cout << "                     Total records in the first Table object is " << t1.size() << endl;
-	cout << "                     Contents of the first object displayed here:" << endl;
+	cout << "Instantiate two Table objects.\n\n";
+	cout << "                     Total records in the first Table object is " << t1.size() << '\n';
+	cout << "                     Contents of the first object displayed here:\n";
 
 	// Display the contents of the first object
 	for (size_t i = 0; i < 10; ++i) t1.print(i);
-	cout << "---------------------------------------------------------------------------" << endl;
+	cout << "---------------------------------------------------------------------------\n";
 
-	cout << "                     Total records in the second Table object is " << t2.size() << endl;
-	cout << "                     Contents of the second object displayed here:" << endl;
+	cout << "                     Total records in the second Table object is " << t2.size() << '\n';
+	cout << "                     Contents of the second object displayed here:\n";
 
 	// Display the contents of the second object
 	for (size_t i = 0; i < 10; ++i) t2.print(i);
-	cout << "===========================================================================" << endl;
+	cout << "===========================================================================\n\n\n\n";
 
-	cout << endl << endl << endl << "**Using random number generator to add 70 numbers to each Table object.**" << endl << endl << endl;
+	cout << "**Using random number generator to add 70 numbers to each Table object.**\n\n\n";
 
 	// Add 70 random numbers to each object
 	for (size_t i = 0; i < 70; i++)
@@ -59,58 +59,55 @@ int main()
 	}
 
 	// Display the contents of the first object
-	cout << "                     Total records in the first Table object is " << t1.size() << endl;
-	cout << "                     Contents of the first object displayed here:" << endl;
+	cout << "                     Total records in the first Table object is " << t1.size() << '\n';
+	cout << "                     Contents of the first object displayed here:\n";
 	for (size_t i = 0; i < 10; ++i) t1.print(i);
-	cout << "---------------------------------------------------------------------------" << endl;
+	cout << "---------------------------------------------------------------------------\n";
 
 	// Display the contents of the second object
-	cout << "                     Total records in the second Table object is " << t2.size() << endl;
-	cout << "                     Contents of the second object displayed here:" << endl;
+	cout << "                     Total records in the second Table object is " << t2.size() << '\n';
+	cout << "                     Contents of the second object displayed here:\n";
 	for (size_t i = 0; i < 10; ++i) t2.print(i);
-	cout << "===========================================================================" << endl;
+	cout << "===========================================================================\n";
 
 
 	// Remove all the contents of the first object
 	t1.table_delete();
-	cout << endl << endl << endl << "** Calling remove function removes all the contents of the first object. **";
-	cout << endl << endl << endl;
+	cout << "\n\n\n** Calling remove function removes all the contents of the first object. **\n\n\n";
 
 	// Display the contents of the first object
-	cout << "                     Total records in the first Table object is " << t1.size() << endl;
-	cout << "                     Contents of the first object displayed here:" << endl;
+	cout << "                     Total records in the first Table object is " << t1.size() << '\n';
+	cout << "                     Contents of the first object displayed here:\n";
 	for (size_t i = 0; i < 10; ++i) t1.print(i);
-	cout << "---------------------------------------------------------------------------" << endl;
+	cout << "---------------------------------------------------------------------------\n";
 
 
 	// Display the contents of the second object
-	cout << "                     Total records in the second Table object is " << t2.size() << endl;
-	cout << "                     Contents of the second object displayed here:" << endl;
+	cout << "                     Total records in the second Table object is " << t2.size() << '\n';
+	cout << "                     Contents of the second object displayed here:\n";
 	for (size_t i = 0; i < 10; ++i) t2.print(i);
-	cout << "===========================================================================" << endl;
+	cout << "===========================================================================\n";
 
 
 	// Use the assignment operator overload to assign the contents of the second object to the first object
 	t1 = t2;
-	cout << endl << endl << endl;
+	
 
-
-	cout << "Lastly, we will use the assignment operator overload." << endl;
-	cout << " ** Using TBObject1 = TBObject2 displays the assignment operator overloading. **";
-	cout << endl << endl << endl;
-
+	cout << "\n\n\nLastly, we will use the assignment operator overload.\n";
+	cout << " ** Using TBObject1 = TBObject2 displays the assignment operator overloading. **\n\n\n";
+	
 	// Display the contents of the first object
-	cout << "                     Total records in the first Table object is " << t1.size() << endl;
-	cout << "                     Contents of the first object displayed here:" << endl;
+	cout << "                     Total records in the first Table object is " << t1.size() << '\n';
+	cout << "                     Contents of the first object displayed here:\n";
 	for (size_t i = 0; i < 10; ++i) t1.print(i);
-	cout << "---------------------------------------------------------------------------" << endl;
+	cout << "---------------------------------------------------------------------------\n";
 
 
 	// Display the contents of the second object
-	cout << "                     Total records in the second Table object is " << t2.size() << endl;
-	cout << "                     Contents of the second object displayed here:" << endl;
+	cout << "                     Total records in the second Table object is " << t2.size() << '\n';
+	cout << "                     Contents of the second object displayed here:\n";
 	for (size_t i = 0; i < 10; ++i) t2.print(i);
-	cout << "===========================================================================" << endl;
+	cout << "===========================================================================\n";
 
 	// Pause the system to allow the user to view the output before automatically exiting. 
 	system("pause");
