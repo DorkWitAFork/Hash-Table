@@ -3,7 +3,7 @@
 	SID #1555744
 	CISP 430
 	Professor Huang
-	Assignemnt 6
+	Assignment 6
 
 	Header file for our table class.
 	We will be using a hash table to store our data. Collisons will be handled by chaining. The underlying data structure will be a linked list.
