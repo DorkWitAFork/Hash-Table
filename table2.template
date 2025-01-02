@@ -3,7 +3,7 @@
 	SID #1555744
 	CISP 430
 	Professor Huang
-	Assignemnt 6
+	Assignment 6
 
 	Table2.cpp
 	Our implementation of the Table class. This class is a hash table that uses a linked list to handle collisions.
