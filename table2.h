@@ -72,8 +72,7 @@
 
 
 template < class RecordType >
-class Table
-{
+class Table {
 private:
 
 	static const size_t TABLE_SIZE = 10;
