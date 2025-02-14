@@ -18,8 +18,7 @@
 #include "table2.h"
 
 
-int main()
-{
+int main() {
 	// feed random number generator with the current time
 	srand(time(0));
 
@@ -45,14 +44,12 @@ int main()
 	std::cout << "**Using random number generator to add 70 numbers to each Table object.**\n\n\n";
 
 	// Add 70 random numbers to each object
-	for (size_t i = 0; i < 70; i++)
-	{
+	for (size_t i = 0; i < 70; i++) {
 		int random = rand() % 201;
 		t1.insert(random);
 	}
 	// Add 70 random numbers to each object
-	for (size_t i = 0; i < 70; i++)
-	{
+	for (size_t i = 0; i < 70; i++) {
 		int random = rand() % 201;
 		t2.insert(random);
 	}
