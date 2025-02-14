@@ -30,13 +30,10 @@
 #include <cassert>
 
 
-using namespace std;
-
 // Constructor that will be used if no size is specified. Default capacity will be 10 fields.
 // Postcondition: The Table has been initialized as an empty Table.
 template < class RecordType>
-Table<RecordType>::Table()
-{
+Table<RecordType>::Table() {
 	total_records = 0;
 	for (int i = 0; i < TABLE_SIZE; i++)		// Initialize all the pointers to NULL
 	{
@@ -49,17 +46,14 @@ Table<RecordType>::Table()
 // Postcondition: The Table has been initialized as a copy of the source Table.
 // We will make use of the helper function list_copy to copy the linked list from the source Table to the new Table.
 template <class RecordType>
-Table<RecordType>::Table(const Table<RecordType>& source)
-{
+Table<RecordType>::Table(const Table<RecordType>& source) {
 	
-	for (size_t i = 0; i < TABLE_SIZE; ++i)
-	{
-		if (source.data[i] == NULL)				// If the source data is NULL, then we will set the data to NULL as well.
-		{
+	for (size_t i = 0; i < TABLE_SIZE; ++i) {
+		if (source.data[i] == NULL) {				// If the source data is NULL, then we will set the data to NULL as well.
 			data[i] = NULL;
 		}
-		else                                    // Otherwise, we will use list_copy to copy the linked list from the source to the new Table.
-		{
+		else {                                   		// Otherwise, we will use list_copy to copy the linked list from the source to the new Table.
+		
 			Node<RecordType>* tail_ptr = NULL;
 			list_copy(source.data[i], data[i], tail_ptr);
 		}
@@ -72,24 +66,23 @@ Table<RecordType>::Table(const Table<RecordType>& source)
 // This will be mostly the same compared to the copy constructor, but we will need to check for self assignment.
 // We will again make use of the helper function list_copy to copy the linked list from the source Table to the new Table.
 template <class RecordType>
-Table<RecordType>& Table<RecordType>::operator=(const Table<RecordType>& source)
-{
+Table<RecordType>& Table<RecordType>::operator=(const Table<RecordType>& source) {
 	if (this == &source) return *this;			// check for self assignment. return if this is true since no work is needed.
 
-	for (size_t i = 0; i < TABLE_SIZE; ++i)		// Clear all the data in the current Table.
-	{
+	for (size_t i = 0; i < TABLE_SIZE; ++i) {		// Clear all the data in the current Table.
+	
 		list_clear(data[i]);
 	}
 
 	
-	for (size_t i = 0; i < TABLE_SIZE; ++i)						// Copy the data from the source Table to the new Table.
-	{
-		if (source.data[i] == NULL)								// If the source data is NULL, then we will set the data to NULL as well.
-		{
+	for (size_t i = 0; i < TABLE_SIZE; ++i) {						// Copy the data from the source Table to the new Table.
+	
+		if (source.data[i] == NULL) {								// If the source data is NULL, then we will set the data to NULL as well.
+		
 			data[i] = NULL;
 		}
-		else
-		{
+		else {
+		
 			Node<RecordType>* tail_ptr = NULL;					// create a tail_ptr to keep track of the last node in the list.
 			list_copy(source.data[i], data[i], tail_ptr);		// Use list_copy to copy the linked list from the source to the new Table.
 		}
@@ -103,10 +96,8 @@ Table<RecordType>& Table<RecordType>::operator=(const Table<RecordType>& source)
 // Postcondition: The Table has been deallocated and the memory has been freed.
 // We will make use of the helper function list_clear to clear all the data in the Table.
 template<class RecordType>
-Table<RecordType>::~Table()
-{
-	for (size_t i = 0; i < TABLE_SIZE; ++i)
-	{
+Table<RecordType>::~Table() {
+	for (size_t i = 0; i < TABLE_SIZE; ++i) {
 		list_clear(data[i]);
 	}
 }
@@ -115,13 +106,11 @@ Table<RecordType>::~Table()
 // Our find node function, which is used to help us find a specific node within our underlying structure (in this case, a linked list) based on the key we are provided.
 // Postcondition: the function will return a pointer that corresponds to the node that has the provided key. If no such key is found, then the return value will be a NULL pointer.
 template<class RecordType>
-Node<RecordType>* Table<RecordType>::find_node(Node<RecordType>*& cursor, Node<RecordType>*& precursor, int key) const
-{
+Node<RecordType>* Table<RecordType>::find_node(Node<RecordType>*& cursor, Node<RecordType>*& precursor, int key) const {
 	cursor = data[hash(key)];		// Start at the head of the list at the index determined by the hash function.
 	precursor = NULL;				// This will always start at NULL since we are at the top and do not have a precursor to a head pointer.
 
-	while (cursor != NULL && cursor->data.key != key)
-	{
+	while (cursor != NULL && cursor->data.key != key) {
 		precursor = cursor;			// Keep track of precursor
 		cursor = cursor->link;		// Move to the next node
 	}
@@ -137,21 +126,19 @@ Node<RecordType>* Table<RecordType>::find_node(Node<RecordType>*& cursor, Node<R
 // Postcondition: If the Table already has a record with a key matching that of entry, then the record is replaced by entry. Otherwise, entry is added to the Table.
 // We will make use of the helper functions included in the linked list class to insert the data into the Table.
 template<class RecordType>
-void Table<RecordType>::insert(const RecordType& entry) 
-{
+void Table<RecordType>::insert(const RecordType& entry) {
 	assert(entry >= 0);														// Ensure that the key is not negative.)
 	size_t index = hash(entry);												// Start by hashing the entry's key to determine the appropriate index.
 		
 	
 	Node<RecordType>* found_node = list_search(data[index], entry);			// Use list_search to check if the entry already exists
 
-	if (found_node != nullptr) 
-	{
+	if (found_node != nullptr) {
 		
 		found_node->data = entry;											// If the entry already exists, then we will replace the data with the new entry.
 	}
-	else 
-	{
+	else { 
+	
 		list_head_insert(data[index], entry);								// Otherwise, we will insert the new entry at the head of the list.
 		total_records++;													// Increment the count of total records since a new node was added
 	}
@@ -162,36 +149,31 @@ void Table<RecordType>::insert(const RecordType& entry)
 // Postcondition: If a record with the key is in the Table, then the record is removed. Otherwise, the Table is unchanged.
 // We will make use of the helper functions included in the linked list class to remove the data from the Table.
 template <class RecordType>
-void Table<RecordType>::remove(int key) 
-{
+void Table<RecordType>::remove(int key) {
 	
 	size_t index = hash(key);						// Hash the key to start at the appropriate index.
 	Node<RecordType>* cursor = data[index];			// Cursor to traverse the list
 	Node<RecordType>* precursor = nullptr;			// Precursor to keep track of the node before the cursor
 
 	// Traverse the list to find the node and its precursor
-	while (cursor != nullptr && cursor->data != key) 
-	{
+	while (cursor != nullptr && cursor->data != key) {
 		precursor = cursor;
 		cursor = cursor->link;
 	}
 
 	// Check if the node was found
-	if (cursor == nullptr) 
-	{
+	if (cursor == nullptr) {
 		// Node with the key not found, handle accordingly (e.g., error message)
 		std::cout << "Key not found in the table." << std::endl;
 		return;
 	}
 
 	// Node with the key is found
-	if (precursor == nullptr) 
-	{
+	if (precursor == nullptr) {
 		// The node to remove is the head of the list
 		list_head_remove(data[index]);  // Remove the head node of the list
 	}
-	else 
-	{
+	else {
 		// The node to remove is not the head
 		list_remove(precursor);		// Remove the node following the precursor
 	}
@@ -203,10 +185,9 @@ void Table<RecordType>::remove(int key)
 // Postcondition: The Table has been cleared of all data and the total records has been set to 0.
 // It's basically the same as the destructor, but we will not delete the Table itself.
 template <class RecordType>
-void Table<RecordType>::table_delete()
-{
-	for (size_t i = 0; i < TABLE_SIZE; ++i)		// Clear all the data in the current Table using the list_clear helper function.
-	{
+void Table<RecordType>::table_delete() {
+	for (size_t i = 0; i < TABLE_SIZE; ++i)	{	// Clear all the data in the current Table using the list_clear helper function.
+	
 		list_clear(data[i]);
 	}
 	total_records = 0;
@@ -216,26 +197,22 @@ void Table<RecordType>::table_delete()
 // PRINT FUNCTION
 // Postcondition: If the Table with the index has data, then print the index and data in a chining format
 template<class RecordType>
-void Table<RecordType>::print(int index) const
-{
+void Table<RecordType>::print(int index) const {
 	
-	cout << "[( " << index << " )]----> ";						// No matter what, start by printing [ ( index ) ] ---->
-	if (data[index] == NULL)
-	{
-		cout << " NULL" << endl;								// Just print NULL and return if empty.
+	std::cout << "[( " << index << " )]----> ";						// No matter what, start by printing [ ( index ) ] ---->
+	if (data[index] == NULL) {
+		std::cout << " NULL" << std::endl;								// Just print NULL and return if empty.
 		return;
 	}
-	else
-	{	
+	else {	
 		Node<RecordType>* cursor = data[index];					// Cursor to traverse the index, starting at the head.
-		while (cursor != NULL)
-		{
-			cout << "[" << cursor->data << "]-->";				// While not null, print the data in the node and go to the next node. Prints [data] ---->
+		while (cursor != NULL) {
+			std::cout << "[" << cursor->data << "]-->";				// While not null, print the data in the node and go to the next node. Prints [data] ---->
 			cursor = cursor->link;
 		}
-		cout << " NULL";										// End with NULL and a new line.
+		std::cout << " NULL";										// End with NULL and a new line.
 	}
-	cout << endl;
+	std::cout << std::endl;
 
 }
 
@@ -243,8 +220,7 @@ void Table<RecordType>::print(int index) const
 // Postcondition: The return value is true if the key is present in the Table, otherwise the return value is false.
 // We will make use of the helper function list_search to check if the key is present in the Table.
 template <class RecordType>
-bool Table<RecordType>::is_present(const RecordType& target) const 
-{
+bool Table<RecordType>::is_present(const RecordType& target) const {
 	size_t index = hash(target.key);									// Determine which bucket to search in
 	Node<RecordType>* found_node = list_search(data[index], target);	// Use list_search to check if the target is present
 
@@ -255,8 +231,7 @@ bool Table<RecordType>::is_present(const RecordType& target) const
 // Postcondition: If a record with the key is in the Table, then found is true and result is set to a copy of the record with that key. Otherwise found is false.
 // We will make use of the helper function list_search to find the node with the key.
 template <class RecordType>
-void Table<RecordType>::find(int key, bool& found, RecordType& result) const 
-{
+void Table<RecordType>::find(int key, bool& found, RecordType& result) const {
 	// Start by making a temp object that has the key we are looking for
 	RecordType temp;
 	temp.key = key;
@@ -264,13 +239,11 @@ void Table<RecordType>::find(int key, bool& found, RecordType& result) const
 	size_t index = hash(key);										// Determine which index to search in
 	Node<RecordType>* found_node = list_search(data[index], temp);	// Use list_search to find the node with the key
 
-	if (found_node != nullptr) 
-	{
+	if (found_node != nullptr) {
 		found = true;						// Indicate that the key was found
 		result = found_node->data;			// Copy the data to result
 	}
-	else 
-	{
+	else {
 		found = false;						// Indicate that the key was not found
 	}
 }
