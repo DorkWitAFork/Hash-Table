@@ -8,9 +8,8 @@
 #include <stdlib.h>    // Provides NULL and size_t
 
 template <class Item>
-size_t list_length(Node<Item>* head_ptr)
+size_t list_length(Node<Item>* head_ptr) {
 // Library facilities used: stdlib.h
-{
     Node<Item> *cursor;
     size_t answer;
 
@@ -22,8 +21,7 @@ size_t list_length(Node<Item>* head_ptr)
 }
 
 template <class Item>
-void list_head_insert(Node<Item>*& head_ptr, const Item& new_item)
-{
+void list_head_insert(Node<Item>*& head_ptr, const Item& new_item) {
     Node<Item> *insert_ptr;
 
     insert_ptr = new Node<Item>;
@@ -31,28 +29,22 @@ void list_head_insert(Node<Item>*& head_ptr, const Item& new_item)
     insert_ptr->link = head_ptr;
     head_ptr = insert_ptr;
 
-//cout<<" **list_head_insert** head_ptr->data  "<< head_ptr->data<< " \n";
 }
 
 template <class Item>
-void list_insert(Node<Item>* &previous_ptr, const Item& new_item)
-{
+void list_insert(Node<Item>* &previous_ptr, const Item& new_item) {
     Node<Item> *insert_ptr;
 
     insert_ptr = new Node<Item>;
     insert_ptr->data = new_item;
-//	 insert_ptr->link = NULL;
- //  previous_ptr->link = insert_ptr;
-   insert_ptr->link = previous_ptr->link;
-   previous_ptr->link = insert_ptr;
 
-//   cout<<" $$list_insert$$ previous_ptr->data  "<< previous_ptr->data<< " \n";
- //     cout<<" $$list_insert$$ insert_ptr->data  "<< insert_ptr->data<< " \n";
+    insert_ptr->link = previous_ptr->link;
+    previous_ptr->link = insert_ptr;
+
 }
 
 template <class Item>
-Node<Item>* list_search(Node<Item>* head_ptr, const Item& target)
-{
+Node<Item>* list_search(Node<Item>* head_ptr, const Item& target) {
     Node<Item> *cursor;
 
     for (cursor = head_ptr; cursor != NULL; cursor = cursor->link)
@@ -63,9 +55,8 @@ Node<Item>* list_search(Node<Item>* head_ptr, const Item& target)
 }
 
 template <class Item, class SizeType>
-Node<Item>* list_locate(Node<Item>* head_ptr, SizeType position)
+Node<Item>* list_locate(Node<Item>* head_ptr, SizeType position) {
 // Library facilities  assert.h, stdlib.h
-{
     Node<Item> *cursor;
     size_t i;
 
@@ -78,8 +69,7 @@ Node<Item>* list_locate(Node<Item>* head_ptr, SizeType position)
 }
 
 template <class Item>
-void list_head_remove(Node<Item>*& head_ptr)
-{
+void list_head_remove(Node<Item>*& head_ptr) {
     Node<Item> *remove_ptr;
 
     remove_ptr = head_ptr;
@@ -88,8 +78,7 @@ void list_head_remove(Node<Item>*& head_ptr)
 }
 
 template <class Item>
-void list_remove(Node<Item>* previous_ptr)
-{
+void list_remove(Node<Item>* previous_ptr) {
     Node<Item> *remove_ptr;
 
     remove_ptr = previous_ptr->link;
@@ -98,18 +87,18 @@ void list_remove(Node<Item>* previous_ptr)
 }
 
 template <class Item>
-void list_clear(Node<Item>*& head_ptr)
+void list_clear(Node<Item>*& head_ptr) {
 // Library facilities used: stdlib.h
-{
+
     while (head_ptr != NULL)
         list_head_remove(head_ptr);
 }
 
 template <class Item>
 void list_copy
-(Node<Item>* source_ptr, Node<Item>*& head_ptr, Node<Item>*& tail_ptr)
+(Node<Item>* source_ptr, Node<Item>*& head_ptr, Node<Item>*& tail_ptr) {
 // Library facilities used: stdlib.h
-{
+
     head_ptr = NULL;
     tail_ptr = NULL;
 
@@ -122,8 +111,7 @@ void list_copy
     tail_ptr = head_ptr;
 
     // Copy the rest of the nodes one at a time, adding at the tail of new list
-    for (source_ptr = source_ptr->link; source_ptr != NULL; source_ptr = source_ptr->link)
-    {
+    for (source_ptr = source_ptr->link; source_ptr != NULL; source_ptr = source_ptr->link) {
         list_insert(tail_ptr, source_ptr->data);
         tail_ptr = tail_ptr->link;
     }
@@ -131,9 +119,9 @@ void list_copy
 
 template <class Item>
 void list_piece
-(Node<Item>* start_ptr, Node<Item>* end_ptr, Node<Item>*& head_ptr, Node<Item>*& tail_ptr)
+(Node<Item>* start_ptr, Node<Item>* end_ptr, Node<Item>*& head_ptr, Node<Item>*& tail_ptr) {
 // Library facilities used: assert.h, stdlib.h
-{
+
     head_ptr = NULL;
     tail_ptr = NULL;
 
@@ -148,8 +136,7 @@ void list_piece
         return;
     
     // Copy the rest of the nodes one at a time, adding at the tail of new list
-    for (start_ptr = start_ptr->link; start_ptr != NULL; start_ptr = start_ptr->link)
-    {
+    for (start_ptr = start_ptr->link; start_ptr != NULL; start_ptr = start_ptr->link) {
         list_insert(tail_ptr, start_ptr->data);
         tail_ptr = tail_ptr->link;
         if (start_ptr == end_ptr) 
@@ -158,9 +145,9 @@ void list_piece
 }
 
 /*template <class Item>
-void operator =(const Node<Item>& source) 
+void operator =(const Node<Item>& source) {
 // Library facilities used: link2.h, stdlib.h 
-{
+
     size_t i;
   //  Node<Item>* tail_ptr; // Needed for list_copy
 
