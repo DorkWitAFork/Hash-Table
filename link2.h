@@ -87,8 +87,7 @@
 #include <stdlib.h> // Provides size_t
 
     template <class Item>
-    struct Node
-    {
+    struct Node {
         Item data;
         Node *link;
     };
