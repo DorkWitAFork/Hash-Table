@@ -35,8 +35,7 @@
 template < class RecordType>
 Table<RecordType>::Table() {
 	total_records = 0;
-	for (int i = 0; i < TABLE_SIZE; i++)		// Initialize all the pointers to NULL
-	{
+	for (int i = 0; i < TABLE_SIZE; i++)	{	// Initialize all the pointers to NULL
 		data[i] = NULL;
 	}
 
@@ -136,8 +135,7 @@ void Table<RecordType>::insert(const RecordType& entry) {
 	if (found_node != nullptr) {
 		
 		found_node->data = entry;											// If the entry already exists, then we will replace the data with the new entry.
-	}
-	else { 
+	} else { 
 	
 		list_head_insert(data[index], entry);								// Otherwise, we will insert the new entry at the head of the list.
 		total_records++;													// Increment the count of total records since a new node was added
@@ -172,8 +170,7 @@ void Table<RecordType>::remove(int key) {
 	if (precursor == nullptr) {
 		// The node to remove is the head of the list
 		list_head_remove(data[index]);  // Remove the head node of the list
-	}
-	else {
+	} else {
 		// The node to remove is not the head
 		list_remove(precursor);		// Remove the node following the precursor
 	}
@@ -203,8 +200,7 @@ void Table<RecordType>::print(int index) const {
 	if (data[index] == NULL) {
 		std::cout << " NULL" << std::endl;								// Just print NULL and return if empty.
 		return;
-	}
-	else {	
+	} else {	
 		Node<RecordType>* cursor = data[index];					// Cursor to traverse the index, starting at the head.
 		while (cursor != NULL) {
 			std::cout << "[" << cursor->data << "]-->";				// While not null, print the data in the node and go to the next node. Prints [data] ---->
@@ -241,9 +237,8 @@ void Table<RecordType>::find(int key, bool& found, RecordType& result) const {
 
 	if (found_node != nullptr) {
 		found = true;						// Indicate that the key was found
-		result = found_node->data;			// Copy the data to result
-	}
-	else {
+		result = found_node->data;				// Copy the data to result
+	} else {
 		found = false;						// Indicate that the key was not found
 	}
 }
